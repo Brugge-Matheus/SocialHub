@@ -14,7 +14,7 @@ class LoginController extends Controller {
             $_SESSION['flash'] = '';
         }
 
-        $this->render('login', [
+        $this->render('signin', [
             'flash' => $flash
         ]);
     }
@@ -42,11 +42,51 @@ class LoginController extends Controller {
     }
 
     public function signup() {
-        echo "Cadastro";
+        $flash = ''; 
+
+        if(!empty($_SESSION['flash'])) {
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+
+        $this->render('signup', [
+            'flash' => $flash
+        ]);
     }
 
     public function signupAction() {
-        echo 'Cadastro recebido';
+        $name = filter_input(INPUT_POST, 'name');
+        $birthdate = filter_input(INPUT_POST, 'birthdate');
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $passwd = filter_input(INPUT_POST, 'password');
+
+        if($name && $birthdate && $email && $passwd) {
+            $birthdate = explode('/', $birthdate);
+
+            if(count($birthdate) !== 3) {
+                $_SESSION['flash'] = 'Data de nascimento inválida';
+                $this->redirect('/register');
+            }
+
+            $birthdate = $birthdate[2].'-'.$birthdate[1].'-'.$birthdate[0];
+            if(strtotime($birthdate) === false) {
+                $_SESSION['flash'] = 'Data de nascimento inválida';
+                $this->redirect('/register');
+            }
+
+            if(LoginHandler::emailExists($email) === false) {
+                $token = LoginHandler::addUser($name, $email, $passwd, $birthdate);
+                $_SESSION['token'] = $token;
+                $this->redirect('/');
+
+            } else {
+                $_SESSION['flash'] = 'E-mail ja cadastrado';
+                $this->redirect('/register');
+            }
+
+        } else {
+            $this->redirect('/register');
+        }
     }
 
 }
