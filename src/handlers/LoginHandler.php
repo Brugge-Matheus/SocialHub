@@ -12,9 +12,9 @@ class LoginHandler {
                 
                 $loggedUser = new User();
                 
-                $loggedUser->setId($data['id']);
-                $loggedUser->setEmail($data['email']);
-                $loggedUser->setName($data['name']);
+                $loggedUser->id = $data['id'];
+                $loggedUser->name = $data['name'];
+                $loggedUser->avatar = $data['avatar'];
 
                 return $loggedUser;
             } 
