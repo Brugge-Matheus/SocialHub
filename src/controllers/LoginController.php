@@ -85,6 +85,7 @@ class LoginController extends Controller {
             }
 
         } else {
+            $_SESSION['flash'] = 'Preencha os campos corretamente';
             $this->redirect('/register');
         }
     }
