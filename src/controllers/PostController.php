@@ -5,8 +5,7 @@ use \core\Controller;
 use src\handlers\LoginHandler;
 use src\handlers\PostHandler;
 
-class HomeController extends Controller {
-
+class PostController extends Controller {
     private $loggedUser;
 
     public function __construct() {
@@ -19,15 +18,19 @@ class HomeController extends Controller {
 
     }
 
-    public function index() {
-        $feed = PostHandler::getHomeFeed(
-            $this->loggedUser->id,
-        );
+    public function new() {
+        $body = filter_input(INPUT_POST, 'body');
 
-        $this->render('home', [
-            'loggedUser' => $this->loggedUser,
-            'feed' => $feed
-        ]);
+        if($body) {
+            PostHandler::addPost(
+                $this->loggedUser->id,
+                'text',
+                $body
+            );
+        }
+
+        $this->redirect('/');
     }
+    
 
 }
