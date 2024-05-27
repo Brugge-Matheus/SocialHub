@@ -9,6 +9,7 @@ class PostHandler {
 
     public static function addPost($idUser, $type, $body) {
         $body = trim($body);
+        date_default_timezone_set('America/Sao_Paulo');
 
         if(!empty($idUser) && !empty($body)) {
             Post::insert([
@@ -49,6 +50,11 @@ class PostHandler {
             $newPost->type = $postItem['type'];
             $newPost->date = $postItem['created_at'];
             $newPost->body = $postItem['body'];
+            $newPost->mine = false;
+
+            if($postItem['id_user'] == $idUser) {
+                $newPost->mine = true;
+            }
 
             // 4. Preecher as informações adicionais no post
             $newUser = User::select()->where('id', $postItem['id_user'])->one();
@@ -58,8 +64,14 @@ class PostHandler {
             $newPost->user->name = $newUser['name'];
             $newPost->user->avatar = $newUser['avatar'];
 
-            //Todo
-            //
+
+            //TODO: Pegar as informações de likes
+            $newPost->likeCount = 0;
+            $newPost->liked = true;
+
+            //TODO: Pegar as informações de comentários
+            $newPost->comments = [];
+
 
             $posts[] = $newPost;
         }

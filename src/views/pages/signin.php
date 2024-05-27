@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Login - SocialHub</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
     <link rel="stylesheet" href="<?= $base?>/assets/css/login.css" />
 </head>
+
 <body>
     <header>
         <div class="container">
-            <a href=""><img src="<?=$base?>/assets/images/devsbook_logo.png" /></a>
+            <a href=""><img src="<?=$base?>/assets/images/socialhub_logo.png" /></a>
         </div>
     </header>
     <section class="container main">
         <form method="POST" action="<?=$base?>/login">
-        <?php if(!empty($flash)):?>
+            <?php if(!empty($flash)):?>
 
-        <div class="flash"><?=$flash?></div>
+            <div class="flash"><?=$flash?></div>
 
-        <?php endif;?>
+            <?php endif;?>
 
             <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
 
@@ -30,4 +32,5 @@
         </form>
     </section>
 </body>
+
 </html>
