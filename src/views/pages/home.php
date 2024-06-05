@@ -18,10 +18,10 @@
 
                     <?php endforeach;?>
 
-                    <div class="feed-pagination"></div>
+                    <div class="feed-pagination">
                     <?php for($i = 0; $i < $feed['pageCount']; $i++): ?>
 
-                    <a href="<?=$base?>/?page=<?=$i?>"><?=($i + 1)?></a>
+                    <a class="<?= $feed['currentPage'] == $i ? 'active' : ''?>" href="<?=$base?>/?page=<?=$i?>"><?=($i + 1)?></a>
 
 
                     <?php endfor;?>

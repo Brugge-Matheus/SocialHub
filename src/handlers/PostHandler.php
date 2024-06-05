@@ -88,7 +88,8 @@ class PostHandler {
         // 5. Retornar o resultado
         return [
             'posts' => $posts,
-            'pageCount' => $pageCount
+            'pageCount' => $pageCount,
+            'currentPage' => $page
         ];
     }
 }
