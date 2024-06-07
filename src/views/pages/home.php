@@ -23,7 +23,6 @@
 
                     <a class="<?= $feed['currentPage'] == $i ? 'active' : ''?>" href="<?=$base?>/?page=<?=$i?>"><?=($i + 1)?></a>
 
-
                     <?php endfor;?>
                 </div>
             </div>
