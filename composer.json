@@ -1,0 +1,15 @@
+{
+    "name": "mathe/social-hub",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matheus Brugge Milczwski",
+            "email": "128723144+Brugge-Matheus@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
