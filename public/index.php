@@ -1,4 +1,8 @@
 <?php
-include '../app/DAO/config.php';
 
-var_dump($base);
+require '../bootstrap.php';
+
+$auth = new Auth(connect(), BASE);
+dd($userInfo = $auth->checkToken());
+
+// echo 'Index';

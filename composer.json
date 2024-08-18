@@ -3,7 +3,12 @@
     "autoload": {
         "psr-4": {
             "app\\": "app/"
-        }
+        },
+        "files": [
+            "app/Models/Connect.php",
+            "app/Core/Config.php",
+            "app/Models/Auth.php"
+        ]
     },
     "authors": [
         {
@@ -11,5 +16,7 @@
             "email": "128723144+Brugge-Matheus@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/var-dumper": "^6.0"
+    }
 }
