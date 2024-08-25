@@ -1,2 +1,2 @@
 <?php $render('header');
-dd($user);
+dd($user, 'Logged');

@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use \core\Controller;
+use src\helpers\LoginHelper;
 use \src\helpers\LoginValidate;
 
 class HomeController extends Controller
@@ -11,7 +12,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->loggedUser = LoginValidate::checkLogin();
+        $this->loggedUser = LoginHelper::checkLogin();
 
         if (!$this->loggedUser) {
             $this->redirect('/login');
