@@ -22,18 +22,18 @@ class LoginHelper
         return false;
     }
 
-    public static function verifyLogin($email, $password)
+    public static function verifyLogin($email, $password): string|false
     {
         $data = User::select()->where('email', $email)->one();
 
         // Debug
         // dd($data);
 
-        $password = trim($password);
+        // $password = trim($password);
 
         if (!empty($data)) {
-            // if (password_verify($password, $data->password)) {
-            if ($password === $data->password) {
+            if (password_verify($password, $data->password)) {
+                // if ($password === $data->password) {
                 $token = md5(time() . rand(1, 99999999));
 
                 User::update()->set('token', $token)->where('email', $email)->execute();
@@ -43,5 +43,28 @@ class LoginHelper
         }
 
         return false;
+    }
+
+    public static function emailExists(string $email): bool
+    {
+        $data = User::select()->where('email', $email)->get();
+
+        return $data ? true : false;
+    }
+
+    public static function addUser(string $name, string $email, string $password, string $birthdate)
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $token = md5(time() . rand(1, 99999999));
+
+        $data = User::insert([
+            'name' => $name,
+            'email' => $email,
+            'password' => $hash,
+            'birthdate' => $birthdate,
+            'token' => $token
+        ])->execute();
+
+        return $token;
     }
 }
