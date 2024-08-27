@@ -4,7 +4,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use src\helpers\LoginHelper;
-use \src\helpers\LoginValidate;
+use src\helpers\PostHelper;
 
 class HomeController extends Controller
 {
@@ -21,6 +21,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        $this->render('home', ['user' => $this->loggedUser]);
+        $feed = PostHelper::getHomeFeed($this->loggedUser->id);
+
+        $this->render(
+            'home',
+            [
+                'user' => $this->loggedUser,
+                'feed' => $feed
+            ]
+        );
     }
 }

@@ -18,16 +18,16 @@
     </div>
 </div>
 <script type="text/javascript">
-    let feedInput = document.querySelector('.feed-new-input');
-    let feedSubmit = document.querySelector('.feed-new-send');
-    let feedForm = document.querySelector('.feed-new-form');
+let feedInput = document.querySelector('.feed-new-input');
+let feedSubmit = document.querySelector('.feed-new-send');
+let feedForm = document.querySelector('.feed-new-form');
 
-    feedSubmit.addEventListener('click', function(obj) {
-        let value = feedInput.innerText;
+feedSubmit.addEventListener('click', function(obj) {
+    let value = feedInput.innerText.trim();
 
-        if (value != '') {
-            feedForm.querySelector('input[name=body]').value = value;
-            feedForm.submit();
-        }
-    });
+    if (value != '') {
+        feedForm.querySelector('input[name=body]').value = value;
+        feedForm.submit();
+    }
+});
 </script>

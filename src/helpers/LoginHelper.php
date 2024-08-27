@@ -15,7 +15,18 @@ class LoginHelper
             $data = User::select()->where('token', $token)->one();
 
             if (!empty($data)) {
-                return $data;
+                $user = new User();
+                $user->id = $data->id;
+                $user->email = $data->email;
+                $user->name = $data->name;
+                $user->birthdate = $data->birthdate;
+                $user->city = $data->city;
+                $user->work = $data->work;
+                $user->avatar = $data->avatar;
+                $user->cover = $data->cover;
+                $user->token = $data->token;
+
+                return $user;
             }
         }
 
