@@ -4,6 +4,7 @@ namespace src\helpers;
 
 use core\Model;
 use \src\models\Post;
+use \src\models\User;
 use \src\models\UserRelation;
 
 class PostHelper
@@ -36,5 +37,33 @@ class PostHelper
         }
 
         $user[] = $idUser;
+
+        $postList = Post::select()->where('id_user', 'in', $user)->orderBy('created_at', 'desc')->get();
+
+        // Debug
+        // dd($posts);
+
+        $posts = [];
+        foreach ($postList as $postItem) {
+            $newPost = new Post();
+            $newPost->type = $postItem->type;
+            $newPost->created_at = $postItem->created_at;
+            $newPost->body = $postItem->body;
+
+            $newUser = User::select()->where('id', $postItem->id_user)->one();
+            $newPost->userId = $newUser->id;
+            $newPost->userName = $newUser->name;
+            $newPost->userAvatar = $newUser->avatar;
+
+            $posts[] = $newPost;
+
+            // Debug
+            // echo "<pre>";
+            // print_r($postItem);
+            // echo "</pre>";
+        }
+
+
+        dd($posts);
     }
 }
