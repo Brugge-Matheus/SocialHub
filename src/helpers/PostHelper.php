@@ -64,6 +64,6 @@ class PostHelper
         }
 
 
-        dd($posts);
+        // dd($posts);
     }
 }
